@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+    <form action="submit" method="POST">
+        <div>
+            <labe>Algo Name</labe>
+            <input type="text" name="algo_name">
+        </div>
+        <div>
+            <labe>Signal</labe>
+            <input type="text" name="signal">
+        </div>
+        <div>
+            <labe>Trade</labe>
+            <input type="text" name="trade">
+        </div>
+        <div>
+            <labe>Ticker</labe>
+            <input type="text" name="ticker">
+        </div>
+        <input type="submit" value="Submit">
+    </form>
+
+    <button id='toggle_table'>Show Table</button>
+    <table id="algo_table">
+        <thead>
+            <td>Algo Name</td>
+            <td>PnL</td>
+        </thead>
+        {% for row in data %}
+            <tr>
+                <td><a href="/draw?algoname={{ row.algo_name }}">{{ row.algo_name }}</a></td>
+                <td>{{ row.average_pnl }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <script>
+        $(document).ready(function(){
+            $("#algo_table").hide();
+            $("#toggle_table").click(function(){
+                $("#algo_table").toggle();
+            })
+        });
+    </script>
+</body>
+</html>
